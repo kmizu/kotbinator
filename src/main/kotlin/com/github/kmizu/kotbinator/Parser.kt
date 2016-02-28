@@ -15,12 +15,22 @@ val one: Parser<String> = parserOf{input ->
         ParseFailure()
 }
 
+fun <A> rule(p: () -> Parser<A>): () -> Parser<A> = p
+
 fun <T> parserOf(target: (String) -> ParseResult<T>): Parser<T> = Parser<T>(target)
 
 class Parser<A>(val target: (String) -> ParseResult<A>) {
     fun parse(input: String): ParseResult<A> {
         return target(input)
     }
+
+    fun toAny(): Parser<Any> = parserOf({input ->
+        val r = parse(input)
+        when(r){
+            is ParseSuccess -> ParseSuccess<Any>(r.value!!, r.rest)
+            is ParseFailure -> ParseFailure()
+        }
+    })
 
     infix fun or(rhs: Parser<A>): Parser<A> = parserOf({input ->
         val r: ParseResult<A> = parse(input)
@@ -45,7 +55,7 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         }
     })
 
-    fun not(): Parser<Any> = parserOf({input ->
+    val not: Parser<Any> = parserOf({input ->
         val r = parse(input)
         when(r) {
             is ParseFailure -> ParseSuccess<Any>("", input)
@@ -53,9 +63,9 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         }
     })
 
-    fun and(): Parser<Any> = this.not().not()
+    val and: Parser<Any> = this.not.not
 
-    fun option(): Parser<A?> = parserOf{input ->
+    val option: Parser<A?> = parserOf{input ->
         val r = parse(input)
         when(r) {
             is ParseSuccess -> r
