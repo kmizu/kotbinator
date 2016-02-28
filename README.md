@@ -1,2 +1,3 @@
 # kotbinator
-com.github.kmizu.kotbinator.Parser Combinator Library in Kotlin
+
+Parser Combinator Library in Kotlin
