@@ -1,3 +1,6 @@
 package com.github.kmizu.kotbinator
 
-data class ParseResult<T>(val value: T, val rest: String)
+sealed class ParseResult<out T> {
+    class ParseSuccess<T>(val value: T, val rest: String): ParseResult<T>()
+    class ParseFailure() : ParseResult<Nothing>()
+}
