@@ -15,7 +15,9 @@ val one: Parser<String> = parserOf{input ->
         ParseFailure()
 }
 
-fun <A> rule(p: () -> Parser<A>): () -> Parser<A> = p
+fun <A> rule(p: () -> Parser<A>): Parser<A> = parserOf({input ->
+    p().parse(input)
+})
 
 fun <T> parserOf(target: (String) -> ParseResult<T>): Parser<T> = Parser<T>(target)
 
@@ -55,7 +57,7 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         }
     })
 
-    val not: Parser<Any> = parserOf({input ->
+    fun not(): Parser<Any> = parserOf({input ->
         val r = parse(input)
         when(r) {
             is ParseFailure -> ParseSuccess<Any>("", input)
@@ -63,9 +65,9 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         }
     })
 
-    val and: Parser<Any> = this.not.not
+    fun and(): Parser<Any> = this.not().not()
 
-    val option: Parser<A?> = parserOf{input ->
+    fun option(): Parser<A?> = parserOf{input ->
         val r = parse(input)
         when(r) {
             is ParseSuccess -> r
@@ -73,7 +75,7 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         }
     }
 
-    val repeat: Parser<List<A>> = parserOf{input ->
+    fun repeat(): Parser<List<A>> = parserOf{input ->
         val rs = mutableListOf<A>()
         var rest = input
         loop@
@@ -89,10 +91,10 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
                 }
             }
         }
-        ParseSuccess<List<A>>(rs, input)
+        ParseSuccess<List<A>>(rs, rest)
     }
 
-    val repeat1: Parser<List<A>> = this.seq(this.repeat).map {pair ->
+    fun repeat1(): Parser<List<A>> = this.seq(this.repeat()).map {pair ->
         val rs = mutableListOf<A>()
         rs.add(pair.first)
         rs.addAll(pair.second)
