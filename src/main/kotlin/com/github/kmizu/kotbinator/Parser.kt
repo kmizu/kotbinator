@@ -5,7 +5,7 @@ fun string(param: String): Parser<String> = parserOf {input ->
     if(input.startsWith(param))
         ParseSuccess<String>(param, input.substring(param.length))
     else
-        ParseFailure()
+        ParseFailure(input)
 }
 
 fun s(param: String): Parser<String> = string(param)
@@ -14,7 +14,7 @@ val one: Parser<String> = parserOf{input ->
     if(input.length > 0)
         ParseSuccess(input.substring(0, 1), input.substring(1))
     else
-        ParseFailure()
+        ParseFailure(input)
 }
 
 fun <A> rule(p: () -> Parser<A>): Parser<A> = parserOf({input ->
@@ -32,7 +32,7 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         val r = parse(input)
         when(r){
             is ParseSuccess -> ParseSuccess<Any>(r.value!!, r.rest)
-            is ParseFailure -> ParseFailure()
+            is ParseFailure -> ParseFailure(input)
         }
     })
 
@@ -49,11 +49,11 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
     infix fun <B> seq(rhs: Parser<B>): Parser<Pair<A, B>> = parserOf({input ->
         val r1: ParseResult<A> = parse(input)
         when(r1){
-            is ParseFailure -> ParseFailure()
+            is ParseFailure -> ParseFailure(input)
             is ParseSuccess -> {
                 val r2 = rhs.parse(r1.rest)
                 when(r2) {
-                    is ParseFailure -> ParseFailure()
+                    is ParseFailure -> ParseFailure(r1.rest)
                     is ParseSuccess ->
                         ParseSuccess(Pair(r1.value, r2.value), r2.rest)
                 }
@@ -67,7 +67,7 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         val r = parse(input)
         when(r) {
             is ParseFailure -> ParseSuccess<Any>("", input)
-            is ParseSuccess -> ParseFailure()
+            is ParseSuccess -> ParseFailure(input)
         }
     })
 
@@ -111,7 +111,7 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         val r1 = parse(input)
         when(r1) {
             is ParseSuccess -> ParseSuccess(f(r1.value), r1.rest)
-            is ParseFailure -> ParseFailure()
+            is ParseFailure -> ParseFailure(input)
         }
     }
 }
