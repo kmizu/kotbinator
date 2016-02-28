@@ -8,6 +8,8 @@ fun string(param: String): Parser<String> = parserOf {input ->
         ParseFailure()
 }
 
+fun s(param: String): Parser<String> = string(param)
+
 val one: Parser<String> = parserOf{input ->
     if(input.length > 0)
         ParseSuccess(input.substring(0, 1), input.substring(1))
@@ -42,6 +44,8 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         }
     })
 
+    operator fun div(rhs: Parser<A>): Parser<A> = this or rhs
+
     infix fun <B> seq(rhs: Parser<B>): Parser<Pair<A, B>> = parserOf({input ->
         val r1: ParseResult<A> = parse(input)
         when(r1){
@@ -57,7 +61,9 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         }
     })
 
-    fun not(): Parser<Any> = parserOf({input ->
+    operator fun <B> plus(rhs: Parser<B>): Parser<Pair<A, B>> = this seq rhs
+
+    operator fun not(): Parser<Any> = parserOf({input ->
         val r = parse(input)
         when(r) {
             is ParseFailure -> ParseSuccess<Any>("", input)

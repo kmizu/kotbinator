@@ -12,13 +12,13 @@ allprojects {
 }
 
 dependencies {
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 }
 
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
-mainClassName = 'demo.HelloWorldKt'
+mainClassName = 'com.github.kmizu.kotbinator.Main'
 
 defaultTasks 'run'
 

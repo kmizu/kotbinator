@@ -1,8 +1,8 @@
 package com.github.kmizu.kotbinator
 
-fun S(): Parser<Any> = rule { ((A() seq string("c")).and() seq string("a").repeat1() seq B() seq (string("a") or string("b") or string("c")).not()).toAny() }
-fun A(): Parser<Any> = rule { (string("a") seq A().option() seq string("b")).toAny() }
-fun B(): Parser<Any> = rule { (string("b") seq B().option() seq string("c")).toAny() }
+fun S(): Parser<Any> = rule { ((A() + s("c")).and() + s("a").repeat1() + B() + !(s("a") / s("b") / s("c"))).toAny() }
+fun A(): Parser<Any> = rule { (s("a") + A().option() + s("b")).toAny() }
+fun B(): Parser<Any> = rule { (s("b") + B().option() + s("c")).toAny() }
 
 
 fun main(args: Array<String>) {
