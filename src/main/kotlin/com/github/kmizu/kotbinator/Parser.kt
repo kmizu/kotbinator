@@ -10,6 +10,14 @@ fun string(param: String): Parser<String> = parserOf {input ->
 
 fun s(param: String): Parser<String> = string(param)
 
+fun r(from: Char, to: Char): Parser<String> = parserOf {input ->
+    if(input.length > 0 && input[0] in from..to) {
+        ParseSuccess(input.substring(0, 1), input.substring(1))
+    } else {
+        ParseFailure(input)
+    }
+}
+
 val one: Parser<String> = parserOf{input ->
     if(input.length > 0)
         ParseSuccess(input.substring(0, 1), input.substring(1))
