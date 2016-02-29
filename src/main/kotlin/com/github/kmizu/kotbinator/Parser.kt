@@ -18,6 +18,10 @@ fun r(from: Char, to: Char): Parser<String> = parserOf {input ->
     }
 }
 
+fun <T> success(value: () -> T): Parser<T> = parserOf({input ->
+    ParseSuccess(value(), input)
+})
+
 val one: Parser<String> = parserOf{input ->
     if(input.length > 0)
         ParseSuccess(input.substring(0, 1), input.substring(1))
