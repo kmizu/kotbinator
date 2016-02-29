@@ -3,7 +3,7 @@ import com.github.kmizu.kotbinator.ParseResult.*
 
 fun string(param: String): Parser<String> = parserOf {input ->
     if(input.startsWith(param))
-        ParseSuccess<String>(param, input.substring(param.length))
+        ParseSuccess(param, input.substring(param.length))
     else
         ParseFailure(input)
 }
