@@ -5,6 +5,7 @@ fun A(): Parser<Any> = rule { (s("a") + A().option() + s("b")).toAny() }
 fun B(): Parser<Any> = rule { (s("b") + B().option() + s("c")).toAny() }
 fun Alphabet(): Parser<String> = rule { r('a','z') / r('A', 'Z') }
 fun Identifier(): Parser<String> = rule { Alphabet().repeat1().map {a: List<String> -> a.fold("", {x, y -> x + y})} }
+fun MinCSV(): Parser<List<String>> = rule{ Identifier() rep1sep s(",") }
 
 fun main(args: Array<String>) {
     val csl = S()
@@ -19,4 +20,8 @@ fun main(args: Array<String>) {
     println(alphabet.parse("Foo"))
     println(alphabet.parse("Bar"))
     println(alphabet.parse("_"))
+    println(MinCSV().parse("A,B,C"))
+    println(MinCSV().parse("foo,bar"))
+    println(MinCSV().parse("hoge,piyo"))
+    println(MinCSV().parse("__,_"))
 }

@@ -69,6 +69,19 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
         }
     })
 
+    infix fun <B> seql(rhs: Parser<B>): Parser<A> = this.seq(rhs).map{it.first}
+
+    infix fun <B> seqr(rhs: Parser<B>): Parser<B> = this.seq(rhs).map{it.second}
+
+    infix fun <B> rep1sep(sep: Parser<B>): Parser<List<A>> = block {
+        (this seq (sep seqr this).repeat()).map {
+            val result = mutableListOf<A>()
+            result.add(it.first)
+            result.addAll(it.second)
+            result
+        }
+    }
+
     operator fun <B> plus(rhs: Parser<B>): Parser<Pair<A, B>> = this seq rhs
 
     operator fun not(): Parser<Any> = parserOf({input ->
