@@ -7,7 +7,6 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
   }
 }
-
 apply plugin: "kotlin" // or apply plugin: "kotlin2js" if targeting JavaScript
 apply plugin: "application"
 apply plugin: "idea"
@@ -18,4 +17,8 @@ repositories {
 
 dependencies {
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.4.4'
 }
