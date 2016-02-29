@@ -7,9 +7,12 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
   }
 }
+
 apply plugin: "kotlin" // or apply plugin: "kotlin2js" if targeting JavaScript
 apply plugin: "application"
 apply plugin: "idea"
+
+mainClassName = "com.github.kmizu.kotbinator.MainKt"
 
 repositories {
   mavenCentral()
