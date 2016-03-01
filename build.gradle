@@ -30,12 +30,17 @@ project(":") {
 
 task sourcesJar(type: Jar, dependsOn: classes) {
   classifier = 'sources'
-  from sourceSets.main.allSource
+    from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
   classifier = 'javadoc'
-  from javadoc.destinationDir
+    from javadoc.destinationDir
+}
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
 }
 
 task wrapper(type: Wrapper) {
@@ -57,25 +62,25 @@ uploadArchives {
 
       pom.project {
         name 'kotbinator'
-        packaging 'jar'
-        // optionally artifactId can be defined here
-        description "A parser combinator library written in Kotlin"
-        licenses {
-          license {
-            name "The MIT License"
-            url "http://www.opensource.org/licenses/MIT"
+          packaging 'jar'
+          // optionally artifactId can be defined here
+          description "A parser combinator library written in Kotlin"
+          licenses {
+            license {
+              name "The MIT License"
+                url "http://www.opensource.org/licenses/MIT"
+            }
           }
-        }
         url "https://github.com/kmizu/kotbinator"
-        scm {
-          url "git@github.com:kmizu/kotbinator.git"
-          connection "scm:git:git@github.com:kmizu/kotbinator.git"
-        }
+          scm {
+            url "git@github.com:kmizu/kotbinator.git"
+              connection "scm:git:git@github.com:kmizu/kotbinator.git"
+          }
         developers {
           developer {
             name "Kota Mizushima"
-            url "https://github.com/kmizu"
-            email "mizukota@gmail.com"
+              url "https://github.com/kmizu"
+              email "mizukota@gmail.com"
           }
         }
       }
