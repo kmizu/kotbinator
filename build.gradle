@@ -43,9 +43,9 @@ task sourcesJar(type: Jar, dependsOn: classes) {
   from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
   classifier = 'javadoc'
-  from javadoc.destinationDir
+  from dokkaJavadoc.outputDirectory
 }
 
 artifacts {
