@@ -1,27 +1,36 @@
 package com.github.kmizu.kotbinator
 
-fun S(): Parser<Any> = rule { ((A() + s("c")).and() + s("a").repeat1() + B() + !(s("a") / s("b") / s("c"))).toAny() }
-fun A(): Parser<Any> = rule { (s("a") + A().option() + s("b")).toAny() }
-fun B(): Parser<Any> = rule { (s("b") + B().option() + s("c")).toAny() }
-fun Alphabet(): Parser<String> = rule { r('a','z') / r('A', 'Z') }
-fun Identifier(): Parser<String> = rule { Alphabet().repeat1().map {a: List<String> -> a.fold("", {x, y -> x + y})} }
-fun MinCSV(): Parser<List<String>> = rule{ Identifier() rep1sep s(",") }
+fun E(): Parser<Int> = rule {
+    (A() + ((s("+") / s("-")) + A()).repeat()).map { result ->
+        result.second.fold(result.first, { value, pair ->
+            if (pair.first == "+") value + pair.second else value - pair.second
+        })
+    }
+}
+fun A(): Parser<Int> = rule {
+    (P() + ((s("*") / s("/")) + P()).repeat()).map { result ->
+        result.second.fold(result.first, { value, pair ->
+            if (pair.first == "*") value * pair.second else value / pair.second
+        })
+    }
+}
+fun P(): Parser<Int> = rule { (s("(") seqr E() seql s(")")) / numeric() }
+fun alphabet(): Parser<String> = rule { r('a','z') / r('A', 'Z') }
+fun identifier(): Parser<String> = rule { alphabet().repeat1().map { a: List<String> -> a.fold("", { x, y -> x + y})} }
+fun numeric(): Parser<Int> = rule { r('0', '9').repeat1().map {v ->  v.fold("", {x ,y -> x + y}).toInt() } }
+
+fun MinCSV(): Parser<List<String>> = rule{ identifier() rep1sep s(",") }
 
 fun main(args: Array<String>) {
-    val csl = S()
-    println(csl.parse("a"))
-    println(csl.parse("b"))
-    println(csl.parse("c"))
-    println(csl.parse("abc"))
-    println(csl.parse("aabbcc"))
-    println(csl.parse("aaabbbccc"))
-    val alphabet = Identifier()
-    println(alphabet.parse("Hoge"))
-    println(alphabet.parse("Foo"))
-    println(alphabet.parse("Bar"))
-    println(alphabet.parse("_"))
-    println(MinCSV().parse("A,B,C"))
-    println(MinCSV().parse("foo,bar"))
-    println(MinCSV().parse("hoge,piyo"))
-    println(MinCSV().parse("__,_"))
+    val calculator = E()
+    println(calculator.parse("1"))
+    println(calculator.parse("1+2"))
+    println(calculator.parse("1+2*3"))
+    println(calculator.parse("1+2*3/4"))
+    println(calculator.parse("(1+2*3)/4"))
+    val mincsv = MinCSV()
+    println(mincsv.parse("A,B,C"))
+    println(mincsv.parse("foo,bar"))
+    println(mincsv.parse("hoge,piyo"))
+    println(mincsv.parse("__,_"))
 }
