@@ -10,8 +10,3 @@ inline fun <T, U> T?.map(f: (T) -> U): U? = block {
         else -> f(this)
     }
 }
-
-fun foo() {
-    val x: String? = "FOO"
-    val y: Int? = x.map { x -> 1 }
-}
