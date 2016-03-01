@@ -22,7 +22,9 @@ fun <T> success(value: () -> T): Parser<T> = parserOf({input ->
     ParseSuccess(value(), input)
 })
 
-val one: Parser<String> = parserOf{input ->
+fun eof(): Parser<Any> = one().not()
+
+fun one(): Parser<String> = parserOf{input ->
     if(input.length > 0)
         ParseSuccess(input.substring(0, 1), input.substring(1))
     else

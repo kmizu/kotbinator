@@ -4,6 +4,7 @@
     <list default="true" id="7e5ec449-a988-4804-9766-5fe1ce69c57e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Main.kt" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Main.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Parser.kt" afterPath="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Parser.kt" />
     </list>
     <ignored path="kotbinator.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,8 +52,8 @@
       <file leaf-file-name="Main.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.6375">
-              <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.31875">
+              <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -72,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Parser.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
+              <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -438,8 +439,8 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/CovariantStack.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/ImmutableStack.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/ParseResult.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Parser.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Control.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Parser.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Main.kt" />
       </list>
     </option>
@@ -1023,7 +1024,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456791739310</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="numerical parser is implemented by kotbinator!">
+      <created>1456816876328</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1456816876328</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1082,7 +1089,8 @@
     <MESSAGE value="Implement combinator `success`" />
     <MESSAGE value="Define map method for nullable-type" />
     <MESSAGE value="Remove unused code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove unused code." />
+    <MESSAGE value="numerical parser is implemented by kotbinator!" />
+    <option name="LAST_COMMIT_MESSAGE" value="numerical parser is implemented by kotbinator!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1424,15 +1432,15 @@
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Parser.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/github/kmizu/kotbinator/Main.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6375">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.31875">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
           <folding />
         </state>
       </provider>

@@ -22,7 +22,7 @@ fun numeric(): Parser<Int> = rule { r('0', '9').repeat1().map {v ->  v.fold("", 
 fun MinCSV(): Parser<List<String>> = rule{ identifier() rep1sep s(",") }
 
 fun main(args: Array<String>) {
-    val calculator = E()
+    val calculator = E() seql eof()
     println(calculator.parse("1"))
     println(calculator.parse("1+2"))
     println(calculator.parse("1+2*3"))
