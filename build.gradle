@@ -34,7 +34,7 @@ project(":") {
 }
 
 task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
-  outputFormat = 'javadoc'
+  outputFormat = 'html'
   outputDirectory = "$buildDir/javadoc"
 }
 
