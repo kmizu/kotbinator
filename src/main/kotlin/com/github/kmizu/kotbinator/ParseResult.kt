@@ -5,23 +5,22 @@ import com.github.kmizu.kotbinator.util.block
 sealed class ParseResult<out T> {
     class ParseSuccess<T>(val value: T, val rest: String): ParseResult<T>() {
         override fun equals(other: Any?): Boolean = block {
-            val result = when (other) {
+            when (other) {
                 is ParseSuccess<*> -> value == other.value && rest == other.rest
                 else -> false
             }
-            result
         }
 
         override fun hashCode(): Int = block {
             val v = value?.hashCode()
-            return when (v) {
+            when (v) {
                 null -> rest.hashCode()
                 else -> v.hashCode() + rest.hashCode()
             }
         }
 
         override fun toString(): String = block {
-            return "Success($value, $rest)"
+            "Success($value, $rest)"
         }
     }
     class ParseFailure(val rest: String) : ParseResult<Nothing>() {
