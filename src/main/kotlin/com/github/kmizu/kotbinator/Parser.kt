@@ -2,6 +2,9 @@ package com.github.kmizu.kotbinator
 import com.github.kmizu.kotbinator.ParseResult.*
 import com.github.kmizu.kotbinator.util.block
 
+/**
+ *  @return *Parser* which parses *param*
+ */
 fun string(param: String): Parser<String> = parserOf {input ->
     if(input.startsWith(param))
         ParseSuccess(param, input.substring(param.length))
@@ -9,9 +12,15 @@ fun string(param: String): Parser<String> = parserOf {input ->
         ParseFailure(input)
 }
 
+/**
+ * Shorthand for *string(param)*
+ */
 fun s(param: String): Parser<String> = string(param)
 
-fun r(from: Char, to: Char): Parser<String> = parserOf {input ->
+/**
+ * @return Parser which parses a Character in from..to
+ */
+fun range(from: Char, to:Char): Parser<String> = parserOf{input ->
     if(input.length > 0 && input[0] in from..to) {
         ParseSuccess(input.substring(0, 1), input.substring(1))
     } else {
@@ -19,12 +28,26 @@ fun r(from: Char, to: Char): Parser<String> = parserOf {input ->
     }
 }
 
+/**
+ * Shorthand for *range(from, to)*
+ */
+fun r(from: Char, to: Char): Parser<String> = range(from, to)
+
+/**
+ * Evaluates *value* and succeed without consuming any input
+ */
 fun <T> success(value: () -> T): Parser<T> = parserOf({input ->
     ParseSuccess(value(), input)
 })
 
+/**
+ * Represents End Of File
+ */
 fun eof(): Parser<Any> = one().not()
 
+/**
+ * Represents any character
+ */
 fun one(): Parser<String> = parserOf{input ->
     if(input.length > 0)
         ParseSuccess(input.substring(0, 1), input.substring(1))
