@@ -1,5 +1,6 @@
 package com.github.kmizu.kotbinator
 import com.github.kmizu.kotbinator.ParseResult.*
+import com.github.kmizu.kotbinator.util.block
 
 fun string(param: String): Parser<String> = parserOf {input ->
     if(input.startsWith(param))
@@ -90,7 +91,7 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
 
     infix fun <B> repsep(sep: Parser<B>): Parser<List<A>> = block {
         (this seq (sep seqr this).repeat()).option().map {
-            when(it) {
+            when (it) {
                 null -> mutableListOf<A>()
                 else -> {
                     val result = mutableListOf<A>()
