@@ -19,7 +19,7 @@ project(":") {
   apply plugin: "idea"
   apply plugin: 'maven'
   apply plugin: 'signing'
-  mainClassName = "com.github.kmizu.kotbinator.MainKt"
+  mainClassName = "com.github.kmizu.kotbinator.example.MainKt"
   group = "com.github.kmizu"
   version = "0.1-SNAPSHOT"
   repositories {
