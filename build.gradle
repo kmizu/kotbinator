@@ -14,14 +14,18 @@ buildscript {
 apply plugin: "org.jetbrains.dokka"
 apply plugin: 'kotlin'
 
+
 project(":") {
   apply plugin: "application"
   apply plugin: "idea"
   apply plugin: 'maven'
   apply plugin: 'signing'
+  signing {
+    sign configurations.archives
+  }
   mainClassName = "com.github.kmizu.kotbinator.example.MainKt"
   group = "com.github.kmizu"
-  version = "0.1-SNAPSHOT"
+  version = "0.1"
   repositories {
     mavenCentral()
       maven {
