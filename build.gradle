@@ -19,9 +19,6 @@ project(":") {
   apply plugin: "idea"
   apply plugin: 'maven'
   apply plugin: 'signing'
-  signing {
-    sign configurations.archives
-  }
   mainClassName = "com.github.kmizu.kotbinator.example.MainKt"
   group = "com.github.kmizu"
   version = "0.2-SNAPSHOT"
@@ -75,7 +72,6 @@ uploadArchives {
         if(rootProject.hasProperty('ossrhUsername') && rootProject.hasProperty('ossrhPassword')) {
           authentication(userName: rootProject.ossrhUsername, password: rootProject.ossrhPassword)
         }
-      }
       }
 
       pom.project {
