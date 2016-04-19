@@ -22,6 +22,11 @@ project(":") {
   mainClassName = "com.github.kmizu.kotbinator.example.MainKt"
   group = "com.github.kmizu"
   version = "0.2-SNAPSHOT"
+  ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+  signing {
+    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+  }
   repositories {
     mavenCentral()
       maven {
