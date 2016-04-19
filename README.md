@@ -1,6 +1,6 @@
 # kotbinator 
 
-[![Build Status](https://travis-ci.org/kmizu/kotbinator.png?branch=master)](https://travis-ci.org/kmizu/kobinator)
+[![Build Status](https://travis-ci.org/kmizu/kotbinator.png?branch=master)](https://travis-ci.org/kmizu/kotbinator)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.kmizu/kotbinator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.kmizu/kotbinator)
 [![Dokka](http://javadoc-badge.appspot.com/com.github.kmizu/kotbinator.svg?label=javadoc)](http://javadoc-badge.appspot.com/com.github.kmizu/kotbinator/index.html)
 [![Reference Status](https://www.versioneye.com/java/com.github.kmizu:kotbinator/reference_badge.svg?style=flat)](https://www.versioneye.com/java/com.github.kmizu:kotbinator/references)
