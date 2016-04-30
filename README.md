@@ -5,7 +5,7 @@
 [![Dokka](http://javadoc-badge.appspot.com/com.github.kmizu/kotbinator.svg?label=javadoc)](http://javadoc-badge.appspot.com/com.github.kmizu/kotbinator/index.html)
 [![Reference Status](https://www.versioneye.com/java/com.github.kmizu:kotbinator/reference_badge.svg?style=flat)](https://www.versioneye.com/java/com.github.kmizu:kotbinator/references)
 
-Parser Combinator Library in Kotlin(0.1).
+Parser Combinator Library in Kotlin (0.1).
 
 Note that this library is yet experimental.  Don't use it in production.
 
