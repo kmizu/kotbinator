@@ -103,6 +103,20 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
 
     infix fun <B> seqr(rhs: Parser<B>): Parser<B> = this.seq(rhs).map{it.second}
 
+    fun <B> chainl(p: Parser<B>, q: Parser<(Pair<A, B>) -> A>): Parser<A> = block {
+        (this + (q + p).repeat()).map{result ->
+            val (x, xs) = result
+            xs.fold(x) {a, result ->
+                val (f, b) = result
+                f(a to b)
+            }
+        }
+    }
+
+    infix fun chainl(q: Parser<(Pair<A, A>) -> A>): Parser<A> = block {
+        this.chainl(this, q)
+    }
+
     infix fun <B> rep1sep(sep: Parser<B>): Parser<List<A>> = block {
         (this seq (sep seqr this).repeat()).map {
             val result = mutableListOf<A>()
