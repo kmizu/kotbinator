@@ -4,20 +4,18 @@ import com.github.kmizu.kotbinator.*
 
 val E: Parser<Int> by lazy {
     rule {
-        (A + ((s("+") / s("-")) + A).repeat()).map { result ->
-            result.second.fold(result.first, { value, pair ->
-                if (pair.first == "+") value + pair.second else value - pair.second
-            })
-        }
+        A.chainl(
+                s("+").map{op -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs + rhs}} /
+                s("-").map{op -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs - rhs}}
+        )
     }
 }
 val A: Parser<Int> by lazy {
     rule {
-        (P + ((s("*") / s("/")) + P).repeat()).map { result ->
-            result.second.fold(result.first, { value, pair ->
-                if (pair.first == "*") value * pair.second else value / pair.second
-            })
-        }
+        P.chainl(
+                s("*").map{op -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs * rhs}} /
+                s("/").map{op -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs / rhs}}
+        )
     }
 }
 val P: Parser<Int> by lazy { rule { (s("(") seqr E seql s(")")) / numeric } }
