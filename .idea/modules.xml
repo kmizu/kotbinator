@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/kotbinator.iml" filepath="$PROJECT_DIR$/kotbinator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotbinator.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotbinator.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotbinator.test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotbinator.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/work.kotbinator.iml" filepath="$PROJECT_DIR$/.idea/modules/work.kotbinator.iml" />
     </modules>
   </component>
 </project>

@@ -5,16 +5,16 @@ import com.github.kmizu.kotbinator.*
 val E: Parser<Int> by lazy {
     rule {
         A.chainl(
-                s("+").map{op -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs + rhs}} /
-                s("-").map{op -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs - rhs}}
+                s("+").map{_ -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs + rhs}} /
+                s("-").map{_ -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs - rhs}}
         )
     }
 }
 val A: Parser<Int> by lazy {
     rule {
         P.chainl(
-                s("*").map{op -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs * rhs}} /
-                s("/").map{op -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs / rhs}}
+                s("*").map{_ -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs * rhs}} /
+                s("/").map{_ -> {pair: Pair<Int, Int> -> val (lhs, rhs) = pair; lhs / rhs}}
         )
     }
 }

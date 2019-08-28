@@ -104,10 +104,9 @@ class Parser<A>(val target: (String) -> ParseResult<A>) {
     infix fun <B> seqr(rhs: Parser<B>): Parser<B> = this.seq(rhs).map{it.second}
 
     fun <B> chainl(p: Parser<B>, q: Parser<(Pair<A, B>) -> A>): Parser<A> = block {
-        (this + (q + p).repeat()).map{result ->
-            val (x, xs) = result
-            xs.fold(x) {a, result ->
-                val (f, b) = result
+        (this + (q + p).repeat()).map{r ->
+            val (x, xs) = r
+            xs.fold(x) {a, (f, b) ->
                 f(a to b)
             }
         }
